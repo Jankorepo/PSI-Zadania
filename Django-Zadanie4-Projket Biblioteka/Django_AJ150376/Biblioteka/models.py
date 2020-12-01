@@ -9,7 +9,7 @@ class Ksiazka(models.Model):
     gatunek = models.CharField(max_length=30)
     data_wyporzyczenia = models.DateField()
 class Czytelnik(models.Model):
-    idCzytelnik = models.AutoField(primary_key=True)
+    idCzytelnik = models.AutoField(primary_key=True )
     imie = models.CharField(max_length=30)
     nazwisko = models.CharField(max_length=30)
     wiek = models.IntegerField()
