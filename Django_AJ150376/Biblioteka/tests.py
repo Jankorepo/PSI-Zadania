@@ -1,6 +1,6 @@
 from rest_framework.test import APITestCase
 from . import views
-from .models import Ksiazka, Gatunek, Czytelnik
+from .models import Gatunek, Czytelnik
 from rest_framework import status
 from rest_framework.reverse import reverse
 from django.utils.http import urlencode
