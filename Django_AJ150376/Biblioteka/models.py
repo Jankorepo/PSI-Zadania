@@ -9,7 +9,7 @@ class Czytelnik(models.Model):
     telefon = models.CharField(max_length=11)
     owner = models.ForeignKey('auth.User', related_name='dodani_czytelnicy', on_delete=models.CASCADE, null=True)
     class Meta:
-        ordering=('nazwisko',)
+        ordering=('idCzytelnik',)
     def __str__(self):
         return 'ID:'+str(self.idCzytelnik)+'. '+self.imie + '.  ' +self.nazwisko
 
@@ -30,7 +30,7 @@ class Ksiazka(models.Model):
     czy_wypozyczona=models.BooleanField(default=False)
     owner = models.ForeignKey('auth.User', related_name='dodane_ksiazki', on_delete=models.DO_NOTHING, null=True)
     class Meta:
-        ordering=('tytul',)
+        ordering=('idKsiazka',)
     def __str__(self):
         return 'ID:'+str(self.idKsiazka)+'. '+self.tytul + '.  ' +self.autor
 
@@ -41,7 +41,7 @@ class AktualneWypozyczenia(models.Model):
     czytelnik = models.ForeignKey(Czytelnik, related_name='aktualnieWypozyczoneKsiazki',
                                   on_delete=models.DO_NOTHING, null=True)
     class Meta:
-        ordering=('czytelnik',)
+        ordering=('idWypozyczenia',)
     def __str__(self):
         return 'ID:'+str(self.ksiazka.idKsiazka)+'. '+str(self.data_wypozyczenia) +'. '+self.ksiazka.tytul\
                + '.  ' + self.ksiazka.autor
@@ -57,7 +57,7 @@ class HistoriaWypozyczen(models.Model):
         return 'ID:'+str(self.ksiazka.idKsiazka)+'. '+str(self.data_wypozyczenia)+str(self.data_zwrotu)\
                + '. '+self.ksiazka.tytul + '.  ' + self.ksiazka.autor
     class Meta:
-        ordering=('czytelnik',)
+        ordering=('idZwrot',)
 
 
 
