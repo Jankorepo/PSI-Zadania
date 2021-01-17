@@ -4,7 +4,7 @@ from .serializers import KsiazkaSerializer, CzytelnikSerializer, HistoriaWypozyc
 from rest_framework import generics
 from rest_framework.response import Response
 from rest_framework.reverse import reverse
-from django_filters import  DateFilter,  FilterSet
+from django_filters import DateFilter,  FilterSet
 from django.contrib.auth.models import User
 from rest_framework import permissions
 

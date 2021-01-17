@@ -33,7 +33,7 @@ class CzytelnikSerializer(HyperlinkedModelSerializer):
 
 class AktualneWypozyczeniaSerializer(ModelSerializer):
     czytelnik=SlugRelatedField(queryset=Czytelnik.objects.all(), slug_field="nazwisko")
-    ksiazka = SlugRelatedField(queryset=Ksiazka.objects.all(), slug_field="tytul")
+    ksiazka = SlugRelatedField(queryset=Ksiazka.objects.all().exclude(czy_wypozyczona=True), slug_field="tytul")
     class Meta:
         model = AktualneWypozyczenia
         fields = ['url',"idWypozyczenia","data_wypozyczenia" ,"ksiazka" ,"czytelnik",]
