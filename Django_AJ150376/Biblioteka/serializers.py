@@ -9,7 +9,7 @@ class KsiazkaSerializer(ModelSerializer):
     ksiazke_dodal = ReadOnlyField(source='owner.username')
     class Meta:
         model= Ksiazka
-        fields = ['pk',"idKsiazka","url", "tytul", "autor", "minimalny_wiek_czytelnika", "data_wydania",
+        fields = ['pk',"url", "tytul", "autor", "minimalny_wiek_czytelnika", "data_wydania",
                   "gatunek","czy_wypozyczona", 'ksiazke_dodal']
     def validate_data_wydania(self, value):
         data=self.get_initial()
@@ -28,7 +28,7 @@ class CzytelnikSerializer(HyperlinkedModelSerializer):
     czytelnika_dodal = ReadOnlyField(source='owner.username')
     class Meta:
         model= Czytelnik
-        fields = ['pk', 'url',"idCzytelnik","imie" ,"nazwisko" ,"wiek" ,"adres","telefon", 'czytelnika_dodal',
+        fields = ['pk', 'url',"imie" ,"nazwisko" ,"wiek" ,"adres","telefon", 'czytelnika_dodal',
                   "aktualnieWypozyczoneKsiazki", "historia"]
 
 class AktualneWypozyczeniaSerializer(ModelSerializer):
@@ -36,7 +36,7 @@ class AktualneWypozyczeniaSerializer(ModelSerializer):
     ksiazka = SlugRelatedField(queryset=Ksiazka.objects.all().exclude(czy_wypozyczona=True), slug_field="tytul")
     class Meta:
         model = AktualneWypozyczenia
-        fields = ['url',"idWypozyczenia","data_wypozyczenia" ,"ksiazka" ,"czytelnik",]
+        fields = ['url',"idWypozyczenia","data_wypozyczenia" ,"ksiazka", "ksiazka_id" ,"czytelnik",]
 class HistoriaWypozyczenSerializer(ModelSerializer):
     czytelnik = SlugRelatedField(queryset=Czytelnik.objects.all(), slug_field="nazwisko")
     ksiazka = SlugRelatedField(queryset=Ksiazka.objects.all(), slug_field="tytul")
