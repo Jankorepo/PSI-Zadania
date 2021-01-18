@@ -36,7 +36,7 @@ class AktualneWypozyczeniaSerializer(ModelSerializer):
     ksiazka = SlugRelatedField(queryset=Ksiazka.objects.all().exclude(czy_wypozyczona=True), slug_field="tytul")
     class Meta:
         model = AktualneWypozyczenia
-        fields = ['url',"idWypozyczenia","data_wypozyczenia" ,"ksiazka", "ksiazka_id" ,"czytelnik", 'kod_dostepu']
+        fields = ['url',"idWypozyczenia","data_wypozyczenia" ,"ksiazka", "ksiazka_id" ,"czytelnik"]
     #def validate_kod_dostepu(self, value):
     #    dane=self.get_initial()
     #    if dane.get("kod_dostepu") != czytelnik.kod_dostepu:
