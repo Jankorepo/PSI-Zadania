@@ -33,14 +33,14 @@ class KsiazkaList(generics.ListCreateAPIView):
     name='ksiazka-list'
     ordering_fields = ['tytul', 'autor', 'idKsiazka']
     filter_class=KsiazkaFilter
-    permission_classes = [permissions.IsAuthenticated]
+    permission_classes = [permissions.IsAuthenticatedOrReadOnly]
     def perform_create(self, serializer):
         serializer.save(owner=self.request.user)
 class KsiazkaDetail(generics.RetrieveUpdateDestroyAPIView):
     queryset = Ksiazka.objects.all()
     serializer_class = KsiazkaSerializer
     name='ksiazka-detail'
-    permission_classes = [permissions.IsAuthenticated]
+    permission_classes = [permissions.IsAuthenticatedOrReadOnly]
 
 class CzytelnikList(generics.ListCreateAPIView):
     queryset = Czytelnik.objects.all()
