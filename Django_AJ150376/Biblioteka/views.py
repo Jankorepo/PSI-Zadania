@@ -61,8 +61,8 @@ class AktualneWypozyczeniaList(generics.ListCreateAPIView):
     queryset = AktualneWypozyczenia.objects.all()
     serializer_class = AktualneWypozyczeniaSerializer
     name = 'aktualnewypozyczenia-list'
-    filter_fields = ['czytelnik_id','ksiazka_id']
-    ordering_fields = ['data_wypozyczenia', 'idWypozyczenia', 'ksiazka_id']
+    filter_fields = ['czytelnik_id']
+    ordering_fields = ['idWypozyczenia']
 class AktualneWypozyczeniaDetail(generics.RetrieveUpdateDestroyAPIView):
     queryset = AktualneWypozyczenia.objects.all()
     serializer_class = AktualneWypozyczeniaSerializer

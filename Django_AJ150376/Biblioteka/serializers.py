@@ -28,7 +28,7 @@ class CzytelnikSerializer(HyperlinkedModelSerializer):
     czytelnika_dodal = ReadOnlyField(source='owner.username')
     class Meta:
         model= Czytelnik
-        fields = ['pk', 'url',"imie" ,"nazwisko" ,"wiek" ,"adres","telefon", 'czytelnika_dodal',
+        fields = ['pk', 'url',"imie" ,"nazwisko" ,"wiek" ,"adres","telefon", "kod_dostepu", 'czytelnika_dodal',
                   "aktualnieWypozyczoneKsiazki", "historia"]
 
 class AktualneWypozyczeniaSerializer(ModelSerializer):
@@ -36,7 +36,12 @@ class AktualneWypozyczeniaSerializer(ModelSerializer):
     ksiazka = SlugRelatedField(queryset=Ksiazka.objects.all().exclude(czy_wypozyczona=True), slug_field="tytul")
     class Meta:
         model = AktualneWypozyczenia
-        fields = ['url',"idWypozyczenia","data_wypozyczenia" ,"ksiazka", "ksiazka_id" ,"czytelnik",]
+        fields = ['url',"idWypozyczenia","data_wypozyczenia" ,"ksiazka", "ksiazka_id" ,"czytelnik", 'kod_dostepu']
+    #def validate_kod_dostepu(self, value):
+    #    dane=self.get_initial()
+    #    if dane.get("kod_dostepu") != czytelnik.kod_dostepu:
+    #        raise ValidationError("Kod dostępu jest błędny")
+    #    return value
 class HistoriaWypozyczenSerializer(ModelSerializer):
     czytelnik = SlugRelatedField(queryset=Czytelnik.objects.all(), slug_field="nazwisko")
     ksiazka = SlugRelatedField(queryset=Ksiazka.objects.all(), slug_field="tytul")

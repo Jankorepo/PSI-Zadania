@@ -7,6 +7,7 @@ class Czytelnik(models.Model):
     wiek = models.IntegerField()
     adres = models.CharField(max_length=150)
     telefon = models.CharField(max_length=11)
+    kod_dostepu=models.IntegerField(default=0)
     owner = models.ForeignKey('auth.User', related_name='dodani_czytelnicy', on_delete=models.CASCADE, null=True)
     class Meta:
         ordering=('idCzytelnik',)
@@ -40,6 +41,7 @@ class AktualneWypozyczenia(models.Model):
     ksiazka = models.ForeignKey(Ksiazka, on_delete=models.CASCADE, null=True)
     czytelnik = models.ForeignKey(Czytelnik, related_name='aktualnieWypozyczoneKsiazki',
                                   on_delete=models.DO_NOTHING, null=True)
+    kod_dostepu = models.IntegerField(default=0)
     class Meta:
         ordering=('idWypozyczenia',)
     def __str__(self):
